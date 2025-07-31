@@ -1,0 +1,11 @@
+P2.pdsprj.mOsTaFa-PC.mOsTaFa.workspace
+*.c~
+*.hex
+*.obj
+*.map
+*.eep
+*.bin
+*.cof
+*.cci
+*.fct
+Debug/
