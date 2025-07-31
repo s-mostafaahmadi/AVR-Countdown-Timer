@@ -62,6 +62,34 @@ This project implements a simple **digital countdown timer** using the **ATmega3
 - The countdown decrements every ~1 second (based on 48 steps).
 - Timer logic runs in a blocking infinite loop until it finishes or reset.
 
+---
+
+## 🚀 How to Run in Simulator Using CodeVisionAVR and Proteus
+
+### Step 1: Compile the Project in CodeVisionAVR
+1. Open the project in CodeVisionAVR (`KB.cproj`).
+2. Ensure the microcontroller is set to **ATmega32** in the project settings.
+3. Edit the code if needed.
+4. Click **Compile** to build the project.
+5. After a successful compilation, the output `.hex` file will be generated in the `Debug` folder.
+
+### Step 2: Run Simulation in Proteus
+1. Open Proteus software.
+2. Load your project schematic or create a new one.
+3. Place the **ATmega32** microcontroller component in the schematic.
+4. Attach the compiled `.hex` file to the microcontroller:
+   - Double-click on the ATmega32 component.
+   - In the **Program File** field, browse and select the `.hex` file generated in CodeVisionAVR.
+5. Connect the input devices like keypad and output devices such as 7-segment displays and LCD as per your circuit design.
+6. Start the simulation and test the timer functionality.
+
+---
+
+**Note:** You can use Proteus’ built-in libraries for keypad and displays or design the schematic according to your hardware connections.
+
+---
+
+If you encounter any issues or have questions, feel free to ask!
 
 ---
 
