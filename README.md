@@ -62,14 +62,6 @@ This project implements a simple **digital countdown timer** using the **ATmega3
 - The countdown decrements every ~1 second (based on 48 steps).
 - Timer logic runs in a blocking infinite loop until it finishes or reset.
 
----
-
-## 📁 Project Structure
-
-- `main.c` – Source code with logic for keypad scanning, LCD, 7-segment display, and timer logic.
-- `alcd.h` – LCD driver header (not included here, use appropriate driver).
-- `delay.h` – Delay utility (likely from CodeVisionAVR or similar).
-- `LICENSE` – MIT License (recommended).
 
 ---
 
