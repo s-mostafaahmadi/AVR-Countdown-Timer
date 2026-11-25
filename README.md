@@ -1,100 +1,63 @@
-# AVR Digital Countdown Timer with Keypad Input and 7-Segment Display
+# AVR Digital Countdown Timer
 
-This project implements a simple **digital countdown timer** using the **ATmega32 microcontroller**, a **4x4 matrix keypad**, **7-segment display**, and an **LCD module**. The timer takes a time input from the keypad, displays it on an LCD, and then counts down visually using a 4-digit 7-segment display.
+![C](https://img.shields.io/badge/C-00599C?logo=c&logoColor=white)
+![MCU](https://img.shields.io/badge/ATmega32-AVR-red)
+![Simulation](https://img.shields.io/badge/simulation-Proteus%20%C2%B7%20CodeVisionAVR-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
 
----
+A digital countdown timer on an **ATmega32**: a 4×4 keypad sets the time, a 16×2 LCD gives feedback and a 4-digit 7-segment display counts down live.
 
-## 🧠 Features
+![Schematic](images/AVR%20Countdown%20Timer%20Schema.png)
 
-- 4-digit countdown timer (HH:MM style).
-- Matrix keypad input interface.
-- Real-time visual display on 7-segment.
-- LCD messages for user interaction and feedback.
-- Input validation (e.g. prevents minute values over 59).
-- Optional clearing and reset with 'C' key.
+## Features
 
----
+- 4-digit countdown (MM:SS style)
+- Matrix keypad input interface
+- Live output on the 4-digit 7-segment display
+- LCD messages and validation (e.g. minutes above 59 are rejected)
+- `C` clears and restarts the input
 
-## 🔧 Hardware Requirements
+## Pin configuration
 
-- ATmega32 microcontroller  
-- 4x4 Matrix Keypad  
-- 4-digit 7-segment display (common cathode)  
-- LCD 16x2 display  
-- External 5V power supply  
-- Pull-up resistors for keypad (internal or external as needed)  
+| Peripheral | Pins | Notes |
+| --- | --- | --- |
+| Keypad rows | `PORTB.0-3` | scan outputs |
+| Keypad columns | `PORTB.4-7` | inputs with pull-ups |
+| 7-segment | `PORTC` | segment data a–g |
+| Digit select | `PORTD.1-4` | 4 digits |
+| LCD | via `alcd.h` | default CodeVision mapping |
 
-### 🔌 Pin Configuration
+## Keypad map
 
-| Peripheral     | Pins Used  | Description                |
-|----------------|------------|----------------------------|
-| Keypad Rows    | PORTB.0-3  | Output (scan lines)        |
-| Keypad Columns | PORTB.4-7  | Input (with pull-ups)      |
-| 7-Segment      | PORTC      | Segment data (a-g)         |
-| Digit Select   | PORTD.1-4  | Controls 4 digits          |
-| LCD            | Default (via `alcd.h`) | LCD control lines |
-
----
-
-## 📦 How to Use
-
-1. Power on the device.
-2. Enter 4 digits using the keypad (e.g. "0123" → 1 minute 23 seconds).
-3. Press `=` to start the countdown.
-4. LCD displays "Running..." while the countdown is active.
-5. The 7-segment display shows the live countdown.
-6. Press `C` to clear and restart input.
-
-
-## 🔤 Keypad Mapping
+```
 [7] [8] [9] [ / ]
 [4] [5] [6] [ * ]
 [1] [2] [3] [ - ]
 [C] [0] [=] [ + ]
+```
 
+## Usage
 
+1. Power on the board.
+2. Type four digits (e.g. `0123` → 1 minute 23 seconds).
+3. Press `=` to start; the LCD shows `Running...` and the 7-segment counts down.
+4. Press `C` to clear and enter a new time.
 
----
+## Build and simulate
 
-## 💡 Notes
+1. Open `KB.cproj` in **CodeVisionAVR**, target **ATmega32**, and compile — the `.hex` appears in `Debug/`.
+2. In **Proteus**, place an ATmega32, attach the `.hex` as *Program File*, then wire the keypad, LCD and 7-segment display (`P2.pdsprj` contains the reference schematic).
+3. Run the simulation.
 
-- Invalid inputs (like minute values > 59) are handled and auto-corrected.
-- The countdown decrements every ~1 second (based on 48 steps).
-- Timer logic runs in a blocking infinite loop until it finishes or reset.
+## Files
 
----
+```
+KB.c / KB.cproj / KB.atsln   # CodeVisionAVR project
+P2.pdsprj                    # Proteus schematic
+images/                      # wiring diagram
+LICENSE.txt                  # MIT
+```
 
-## 🚀 How to Run in Simulator Using CodeVisionAVR and Proteus
+## License
 
-### Step 1: Compile the Project in CodeVisionAVR
-1. Open the project in CodeVisionAVR (`KB.cproj`).
-2. Ensure the microcontroller is set to **ATmega32** in the project settings.
-3. Edit the code if needed.
-4. Click **Compile** to build the project.
-5. After a successful compilation, the output `.hex` file will be generated in the `Debug` folder.
-
-### Step 2: Run Simulation in Proteus
-1. Open Proteus software.
-2. Load your project schematic or create a new one.
-3. Place the **ATmega32** microcontroller component in the schematic.
-4. Attach the compiled `.hex` file to the microcontroller:
-   - Double-click on the ATmega32 component.
-   - In the **Program File** field, browse and select the `.hex` file generated in CodeVisionAVR.
-5. Connect the input devices like keypad and output devices such as 7-segment displays and LCD as per your circuit design.
-6. Start the simulation and test the timer functionality.
-
----
-
-**Note:** You can use Proteus’ built-in libraries for keypad and displays or design the schematic according to your hardware connections.
-
----
-
-If you encounter any issues or have questions, feel free to ask!
-
----
-
-## 📜 License
-
-This project is licensed under the **MIT License**.  
-© 2025 Mostafa Ahmadi
-
+MIT — see [LICENSE.txt](LICENSE.txt). © 2025 Mostafa Ahmadi
